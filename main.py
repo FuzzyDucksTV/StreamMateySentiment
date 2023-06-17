@@ -34,10 +34,7 @@ async def main():
     while True:
         try:
             # Get a chat message
-            chat_data = await chat_connector.get_message()
-            message = chat_data['message']
-            user = chat_data['author']
-            timestamp = chat_data['timestamp']
+            message, user, timestamp = await chat_connector.get_message()
 
             # Analyze the sentiment of the message
             sentiment_score = sentiment_analyzer.analyze_sentiment(message, user, timestamp)
