@@ -1,2 +1,2 @@
-# StreamMateySentinment
+# StreamMateySentiment
  
