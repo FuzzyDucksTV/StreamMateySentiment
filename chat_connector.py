@@ -44,7 +44,7 @@ class ChatConnector:
         Returns:
             str: The URL of the streaming channel.
         """
-        return f"'https://www.youtube.com/watch?v=jfKfPfyJRdk'"
+        return f"https://www.youtube.com/watch?v=jfKfPfyJRdk"
         if self.streaming_service.lower() == 'twitch':
             return f"https://www.twitch.tv/{self.streaming_channel}"
         elif self.streaming_service.lower() == 'youtube':
@@ -61,9 +61,10 @@ class ChatConnector:
             dict: A dictionary containing the timestamp, author, and message.
         """
         chat = self.connect_to_chat()
-        for message in chat.get_messages():
+        for message in chat:
             yield {
                 'timestamp': message['timestamp'],
                 'author': message['author']['name'],
                 'message': message['message']
             }
+

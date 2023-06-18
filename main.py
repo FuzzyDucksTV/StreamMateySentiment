@@ -24,20 +24,23 @@ async def main():
     sentiment_meter = SentimentMeter()
 
     # Connect to the chosen channel set by the user when they first ran the program.
-    StreamingService = os.getenv('STREAMING_SERVICE', 'Twitch')
-    StreamingChannel = os.getenv('STREAMING_CHANNEL', 'fuzzyduckstv')
+    STREAMING_SERVICE = os.getenv('STREAMING_SERVICE', 'Youtube')
+    STREAMING_SERVICE = os.getenv('STREAMING_SERVICE', 'fuzzyduckstv')
 
-    chat_connector = ChatConnector(StreamingService, StreamingChannel)
-    await chat_connector.connect()
+    chat_connector = ChatConnector(STREAMING_SERVICE, STREAMING_SERVICE)
+    chat_connector.connect_to_chat()
 
     # Main loop
     while True:
         try:
             # Get a chat message
-            message, user, timestamp = await chat_connector.get_message()
-
+            #message, user, timestamp = chat_connector.get_message()
+            for message in chat_connector.get_message():
+                timestamp = message['timestamp']
+                author = message['author']
+                text = message['message']
             # Analyze the sentiment of the message
-            sentiment_score = sentiment_analyzer.analyze_sentiment(message, user, timestamp)
+            sentiment_score = sentiment_analyzer.analyze_sentiment(text, author, timestamp)
 
             # Update the sentiment meter with the new sentiment score
             sentiment_meter.update(sentiment_score)
