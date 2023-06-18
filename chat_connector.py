@@ -44,6 +44,7 @@ class ChatConnector:
         Returns:
             str: The URL of the streaming channel.
         """
+        return f"'https://www.youtube.com/watch?v=jfKfPfyJRdk'"
         if self.streaming_service.lower() == 'twitch':
             return f"https://www.twitch.tv/{self.streaming_channel}"
         elif self.streaming_service.lower() == 'youtube':
